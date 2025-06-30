@@ -1,0 +1,8 @@
+flask
+yfinance
+pandas
+numpy
+requests
+beautifulsoup4  # (if you're doing any HTML scraping in news.py or others)
+lxml            # (optional: for parsing HTML faster)
+gunicorn
