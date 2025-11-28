@@ -1,0 +1,18 @@
+trigger:
+- main  # ✅ Automatically triggers on every push to 'main' branch
+
+pool:
+  vmImage: ubuntu-latest  # ✅ Uses an Ubuntu runner
+
+steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.x'  # ✅ Uses Python 3.x
+    addToPath: true
+
+- script: |
+    python -m pip install --upgrade pip
+    pip install -r requirements.txt
+    # Run your main script (replace app.py with your file name)
+    python app.py
+  displayName: 'Install dependencies and run the app'
