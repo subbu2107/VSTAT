@@ -5,32 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>VSTAT Dashboard</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
     body {
       margin: 0;
       background: #0d1117;
       font-family: 'Segoe UI', sans-serif;
       color: white;
       scroll-behavior: smooth;
-      overflow-x: hidden;
     }
 
-    .navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 8px 20px;
-      background-color: #0c1424;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-    }
+   .navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000; /* ensures it stays above other elements */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 20px;
+  background-color: #0c1424;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
 
     .logo-title {
       display: flex;
@@ -46,6 +42,7 @@
 
     .logo-title span {
       font-size: 1.3rem;
+      
       color: #f6f6f7;
       letter-spacing: 4px;
     }
@@ -57,78 +54,75 @@
     }
 
     .nav-links a {
-      color: #e5e7eb;
-      text-decoration: none;
-      font-size: 0.95rem;
-      font-weight: 500;
-      position: relative;
-      display: inline-block;
-      padding: 4px 0;
-      margin-left: 20px;
-      transition: color 0.3s ease;
-    }
+  color: #e5e7eb;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  position: relative;
+  display: inline-block;
+  padding: 4px 0;
+  margin-left: 20px; /* ✅ This adds space between each link */
+  transition: color 0.3s ease;
+}
 
-    .nav-links a:first-child {
-      margin-left: 0;
-    }
+.nav-links a:first-child {
+  margin-left: 0; /* ✅ No margin for the first link */
+}
 
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 0%;
-      height: 2px;
-      background-color: #3b82f6;
-      transition: width 0.3s ease;
-    }
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  height: 2px;
+  background-color: #3b82f6;
+  transition: width 0.3s ease;
+}
 
-    .nav-links a:hover::after {
-      width: 100%;
-    }
+.nav-links a:hover::after {
+  width: 100%;
+}
 
     .main {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 80px 20px 20px;
-    }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80px 20px 20px; /* Added top space to account for fixed navbar */
+}
 
     .search-container {
-      width: 100%;
-      max-width: 800px;
-      display: flex;
-      justify-content: center;
+      width: 100%; max-width: 800px;
+      display: flex; justify-content: center;
       margin-bottom: 50px;
-      flex-direction: column;
-      align-items: center;
+      flex-direction: column; /* ✅ this stacks the text above the form */
+      align-items: center; 
       margin-top: 150px;
     }
-
     .search-form {
-      display: flex;
-      width: 100%;
-      -webkit-box-reflect: below 10px linear-gradient(to bottom, rgba(0,0,0,0.0), rgba(0,0,0,0.4));
+  display: flex;
+  width: 100%;
+  -webkit-box-reflect: below 10px linear-gradient(to bottom, rgba(0,0,0,0.0), rgba(0,0,0,0.4)); /* ✅ Only form reflected */
+}
+    
+    .search-container form {
+      display: flex; width: 100%;
     }
-
     .search-container input {
-      flex: 1;
-      padding: 16px;
-      font-size: 18px;
+      flex: 1; padding: 16px; font-size: 18px;
       border-radius: 10px 0 0 10px;
-      border: none;
-      outline: none;
-      background: #1f2937;
-      color: white;
+      border: none; outline: none;
+      background: #1f2937; color: white;
       box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
     }
 
+    /* Analyze Button Style */
     .analyze-btn {
       font-size: 1.2rem;
       padding: 1rem 2.5rem;
       border: none;
       outline: none;
-      border-radius: 0 0.4rem 0.4rem 0;
+      border-radius: 0.4rem;
       cursor: pointer;
       text-transform: uppercase;
       background-color: rgb(14, 14, 26);
@@ -136,6 +130,7 @@
       font-weight: 700;
       transition: 0.6s;
       box-shadow: 0px 0px 60px #1f4c65;
+      
     }
 
     .analyze-btn:active {
@@ -155,9 +150,7 @@
       justify-content: center;
       max-width: 1000px;
       margin-bottom: 30px;
-      padding: 0 10px;
     }
-
     .nifty-grid button {
       background: #0c0729;
       border: none;
@@ -169,61 +162,35 @@
       cursor: pointer;
       transition: background 0.3s;
     }
-
     .nifty-grid button:hover {
       background: #00CEC8;
     }
 
     .content-area {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      max-width: 1200px;
-      padding: 0 10px;
+      display: flex; flex-direction: column; width: 100%; max-width: 1200px;
     }
-
-    .right-section {
-      width: 100%;
-    }
+    .right-section { width: 100%; }
 
     .card-container {
-      width: 100%;
-      max-width: 500px;
+      width: 500px;
       height: 160px;
       perspective: 1000px;
     }
-
     .card {
-      width: 100%;
-      height: 100%;
-      position: relative;
+      width: 100%; height: 100%; position: relative;
       transform-style: preserve-3d;
       transition: transform 0.6s ease-in-out;
     }
-
     .card-side {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 10px;
-      font-size: 1.1rem;
-      border-radius: 16px;
-      backface-visibility: hidden;
+      position: absolute; width: 100%; height: 100%;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      text-align: center; padding: 10px; font-size: 1.1rem;
+      border-radius: 16px; backface-visibility: hidden;
       background: linear-gradient(270deg, #1e3a8a, #3b82f6, #06b6d4, #10b981);
-      background-size: 600% 600%;
-      animation: wave 6s ease infinite;
+      background-size: 600% 600%; animation: wave 6s ease infinite;
       box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
     }
-
-    .card-side.back {
-      transform: rotateY(180deg);
-    }
-
+    .card-side.back { transform: rotateY(180deg); }
     @keyframes wave {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
@@ -232,41 +199,35 @@
 
     .stock-results {
       background: #161b22;
-      padding: 12px 16px;
+      padding: 12px 16px; /* reduced padding */
       border-radius: 10px;
       margin-top: 60px;
       box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
       position: relative;
-      max-width: 650px;
+      max-width: 650px; /* limit card width */
       margin-left: auto;
       margin-right: auto;
       cursor: pointer;
     }
-
     .stock-results h3 {
       color: #93c5fd;
       font-size: 22px;
       font-weight: 700;
     }
-
     .badge {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      padding: 6px 12px;
-      border-radius: 6px;
-      color: white;
-      font-weight: bold;
-      font-size: 14px;
-    }
+      position: absolute; top: 20px; right: 20px;
+      padding: 6px 12px; border-radius: 6px;
+       color: white;
+      font-weight: bold; font-size: 14px;}
 
-    .badge.overvalued {
-      background-color: #ef4444;
-    }
 
-    .badge.undervalued {
-      background-color: #22c55e;
-    }
+.badge.overvalued {
+  background-color: #ef4444; /* Red */
+}
+
+.badge.undervalued {
+  background-color: #22c55e; /* Green */
+}
 
     .big-value {
       text-align: center;
@@ -277,37 +238,27 @@
     }
 
     .cards {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      margin-top: 20px;
+      display: flex; flex-wrap: wrap; gap: 16px; margin-top: 20px;
     }
-
     .card-box {
       background: linear-gradient(145deg, #1e293b, #111827);
       padding: 12px;
       border-radius: 14px;
       flex: 1 1 30%;
-      min-width: 150px;
       box-shadow: 0 0 10px rgba(0, 255, 255, 0.07);
       transition: transform 0.3s, box-shadow 0.3s;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      display: flex; flex-direction: column; align-items: center;
     }
-
     .card-box:hover {
       transform: translateY(-3px);
       box-shadow: 0 0 18px rgba(0, 255, 255, 0.15);
     }
-
     .card-box h4 {
       margin: 0 0 8px;
       color: #f472b6;
       font-size: 18px;
       font-weight: 700;
     }
-
     .card-box p {
       font-size: 22px;
       font-weight: 700;
@@ -316,449 +267,205 @@
     }
 
     .news-section {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 220px;
-      margin-top: 100px;
+      display: flex; justify-content: flex-end; margin-top: 60px;
     }
+.search-text {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #f3f4f6;
+  animation: fadeIn 2s ease;
+}
+
+.search-text .line2 {
+  text-align: center;
+  font-size: 53px;
+  font-weight: 700;
+  color: #38bef7;
+    margin: 0;               /* Remove top & bottom margin */
+  line-height: 1.2; 
+}
+
+.search-text .line1 {
+  text-align: center;
+  font-size: 55px;
+  font-weight: 500;
+  color: #e0f2fe;
+    margin: 0;               /* Remove top & bottom margin */
+  line-height: 1.2; 
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.left-info {
+  margin-right: 20px;
+  color: white;
+  font-size: 16px;
+}
+
+.left-info hr {
+  border: 1px solid #555;
+  margin: 10px 0;
+}
+
+@keyframes toWhite {
+  0% {
+    background-color: #0d1117;
+  }
+  50% {
+    background-color: #cbd5e1; /* Light gray */
+  }
+  100% {
+    background-color: #f1f5f9; /* Final soft white */
+  }
+}
+footer {
+  background-color: #0d1117;
+  padding: 40px 80px;
+  color: #cbd5e1;
+  font-size: 15px;
+}
+footer h4 {
+  color: white;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+footer h2 {
+  color: white;
+  font-weight: 700;
+}
+footer ul {
+  list-style: none;
+  padding: 0;
+}
+footer ul li a {
+  color: #9ca3af;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 6px;
+}
+footer ul li a:hover {
+  color: #f3f4f6;
+}
+.about-link {
+  letter-spacing: 2px; /* or 4px, 6px based on preference */
+}
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+  }
+
+  .logo-title {
+    margin-left: 0;
+    margin-bottom: 10px;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-right: 0;
+  }
+
+  .main {
+    padding-top: 120px;
+  }
+
+  .search-container {
+    margin-top: 80px;
+    padding: 0 10px;
+  }
+
+  .search-form {
+    flex-direction: column;
+    -webkit-box-reflect: none !important;
+  }
+
+  .search-container input {
+    border-radius: 10px 10px 0 0;
+    margin-bottom: 8px;
+  }
+
+  .analyze-btn {
+    border-radius: 0 0 10px 10px;
+    width: 100%;
+  }
+
+  .nifty-grid {
+    padding: 0 10px;
+    gap: 6px;
+  }
+
+  .cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card-box {
+    width: 100%;
+    max-width: 90%;
+  }
+
+  .card-container {
+    width: 100%;
+    max-width: 90%;
+    margin: 0 auto;
+  }
+
+  .content-area {
+    padding: 0 10px;
+  }
+
+  .stock-results {
+    padding: 16px;
+    max-width: 90%;
+    margin: 60px auto 0;
+  }
+
+  .search-text .line1,
+  .search-text .line2 {
+    font-size: 32px;
+  }
+
+  .search-text {
+    padding: 0 10px;
+  }
+
+  .expanation .Intrinsic,
+  .expanation .dcf-relative {
+    margin-left: 20px !important;
+    margin-right: 20px !important;
+    font-size: 18px !important;
+  }
+
+  footer {
+    padding: 20px;
+  }
+
+  footer > div {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .news-section,
+  #transitionSection > div {
+    flex-direction: column !important;
+    gap: 40px !important;
+    margin-top: 50px !important;
+  }
+
+  .news-section > div,
+  #transitionSection > div > div {
+    width: 100% !important;
+  }
+}
 
-    .soul-text {
-      flex: 1;
-      color: white;
-      min-width: 250px;
-    }
-
-    .soul-text h2 {
-      margin-bottom: 10px;
-    }
-
-    .soul-text hr {
-      border: 1px solid #444;
-      margin-bottom: 10px;
-    }
-
-    .soul-text p {
-      line-height: 1.6;
-      font-size: 18px;
-    }
-
-    .news-card-wrapper {
-      flex: 1.2;
-      min-width: 250px;
-    }
-
-    .search-text {
-      text-align: center;
-      margin-bottom: 20px;
-      color: #f3f4f6;
-      animation: fadeIn 2s ease;
-    }
-
-    .search-text .line2 {
-      text-align: center;
-      font-size: 53px;
-      font-weight: 700;
-      color: #38bef7;
-      margin: 0;
-      line-height: 1.2;
-    }
-
-    .search-text .line1 {
-      text-align: center;
-      font-size: 55px;
-      font-weight: 500;
-      color: #e0f2fe;
-      margin: 0;
-      line-height: 1.2;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes toWhite {
-      0% { background-color: #0d1117; }
-      50% { background-color: #cbd5e1; }
-      100% { background-color: #f1f5f9; }
-    }
-
-    #transitionSection {
-      width: 100vw;
-      margin-left: calc(-50vw + 50%);
-      background: #ffffff;
-      animation: toWhite 2s ease backwards;
-      padding: 5px 20px 85px;
-      box-sizing: border-box;
-    }
-
-    .expanation {
-      margin-top: 80px;
-      text-align: center;
-      font-size: 24px;
-      color: #000000;
-    }
-
-    .Intrinsic {
-      margin-left: auto;
-      margin-right: auto;
-      max-width: 960px;
-      font-size: 24px;
-      padding: 0 20px;
-    }
-
-    .Intrinsic h2 {
-      color: #11171f;
-    }
-
-    .dcf-relative {
-      margin-left: auto;
-      margin-right: auto;
-      max-width: 1200px;
-      font-size: 22px;
-      padding: 0 20px;
-    }
-
-    .dcf-relative h2 {
-      color: #0d1117;
-    }
-
-    footer {
-      background-color: #0d1117;
-      padding: 40px 80px;
-      color: #cbd5e1;
-      font-size: 15px;
-    }
-
-    footer h4 {
-      color: white;
-      font-weight: 600;
-      margin-bottom: 10px;
-    }
-
-    footer h2 {
-      color: white;
-      font-weight: 700;
-    }
-
-    footer ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    footer ul li a {
-      color: #9ca3af;
-      text-decoration: none;
-      display: block;
-      margin-bottom: 6px;
-    }
-
-    footer ul li a:hover {
-      color: #f3f4f6;
-    }
-
-    .footer-content {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      border-bottom: 1px solid #333;
-      padding-bottom: 30px;
-    }
-
-    .footer-section {
-      flex: 1;
-      min-width: 200px;
-      margin-bottom: 20px;
-    }
-
-    .footer-bottom {
-      font-size: 14px;
-      color: #9ca3af;
-      padding-top: 20px;
-    }
-
-    /* Tablet Styles */
-    @media (max-width: 1024px) {
-      .news-section {
-        gap: 40px;
-      }
-
-      .Intrinsic {
-        max-width: 90%;
-        font-size: 22px;
-      }
-
-      .dcf-relative {
-        max-width: 90%;
-        font-size: 20px;
-      }
-
-      footer {
-        padding: 40px 40px;
-      }
-    }
-
-    /* Mobile Styles */
-    @media (max-width: 768px) {
-      .navbar {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 10px 15px;
-      }
-
-      .logo-title {
-        margin-left: 0;
-        margin-bottom: 10px;
-      }
-
-      .logo-title span {
-        font-size: 1.1rem;
-        letter-spacing: 2px;
-      }
-
-      .nav-links {
-        flex-wrap: wrap;
-        gap: 16px;
-        margin-right: 0;
-      }
-
-      .nav-links a {
-        margin-left: 0;
-        margin-right: 15px;
-        font-size: 0.9rem;
-      }
-
-      .main {
-        padding-top: 120px;
-        padding-left: 10px;
-        padding-right: 10px;
-      }
-
-      .search-container {
-        margin-top: 80px;
-        padding: 0 10px;
-      }
-
-      .search-form {
-        flex-direction: column;
-        -webkit-box-reflect: none;
-      }
-
-      .search-container input {
-        border-radius: 10px 10px 0 0;
-        margin-bottom: 0;
-        font-size: 16px;
-        padding: 14px;
-      }
-
-      .analyze-btn {
-        border-radius: 0 0 10px 10px;
-        width: 100%;
-        font-size: 1rem;
-        padding: 0.9rem 2rem;
-      }
-
-      .search-text .line1,
-      .search-text .line2 {
-        font-size: 32px;
-      }
-
-      .search-text {
-        padding: 0 10px;
-      }
-
-      .nifty-grid {
-        padding: 0 5px;
-        gap: 6px;
-      }
-
-      .nifty-grid button {
-        padding: 6px 10px;
-        font-size: 12px;
-      }
-
-      .stock-results {
-        padding: 16px;
-        max-width: 95%;
-        margin: 40px auto 0;
-      }
-
-      .stock-results h3 {
-        font-size: 20px;
-        padding-right: 100px;
-      }
-
-      .badge {
-        top: 15px;
-        right: 15px;
-        font-size: 12px;
-        padding: 5px 10px;
-      }
-
-      .big-value {
-        font-size: 1.3rem;
-      }
-
-      .cards {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .card-box {
-        width: 100%;
-        max-width: 100%;
-        flex: 1 1 100%;
-      }
-
-      .news-section {
-        flex-direction: column;
-        gap: 40px;
-        margin-top: 60px;
-      }
-
-      .soul-text,
-      .news-card-wrapper {
-        width: 100%;
-        flex: none;
-      }
-
-      .soul-text h2 {
-        font-size: 1.5rem;
-      }
-
-      .soul-text p {
-        font-size: 16px;
-      }
-
-      .card-container {
-        max-width: 100%;
-        height: 140px;
-      }
-
-      .card-side {
-        font-size: 1rem;
-        padding: 15px;
-      }
-
-      #transitionSection {
-        padding: 5px 10px 60px;
-      }
-
-      .expanation {
-        margin-top: 60px;
-        font-size: 18px;
-      }
-
-      .Intrinsic {
-        max-width: 100%;
-        font-size: 18px;
-        padding: 0 15px;
-      }
-
-      .dcf-relative {
-        max-width: 100%;
-        font-size: 16px;
-        padding: 0 15px;
-      }
-
-      .dcf-relative h2,
-      .Intrinsic h2 {
-        font-size: 1.3rem;
-      }
-
-      footer {
-        padding: 30px 20px;
-      }
-
-      .footer-content {
-        flex-direction: column;
-        gap: 20px;
-      }
-
-      .footer-section {
-        min-width: 100%;
-      }
-
-      .footer-bottom {
-        font-size: 13px;
-      }
-    }
-
-    /* Small Mobile Styles */
-    @media (max-width: 480px) {
-      .logo-title img {
-        width: 30px;
-        height: 30px;
-      }
-
-      .logo-title span {
-        font-size: 1rem;
-      }
-
-      .search-text .line1,
-      .search-text .line2 {
-        font-size: 26px;
-      }
-
-      .search-container input {
-        font-size: 14px;
-        padding: 12px;
-      }
-
-      .analyze-btn {
-        font-size: 0.9rem;
-        padding: 0.8rem 1.5rem;
-      }
-
-      .nifty-grid button {
-        padding: 5px 8px;
-        font-size: 11px;
-      }
-
-      .stock-results h3 {
-        font-size: 18px;
-      }
-
-      .big-value {
-        font-size: 1.1rem;
-      }
-
-      .card-box h4 {
-        font-size: 16px;
-      }
-
-      .card-box p {
-        font-size: 18px;
-      }
-
-      .soul-text h2 {
-        font-size: 1.3rem;
-      }
-
-      .soul-text p {
-        font-size: 15px;
-      }
-
-      .card-container {
-        height: 120px;
-      }
-
-      .card-side {
-        font-size: 0.9rem;
-        padding: 10px;
-      }
-
-      .Intrinsic h2,
-      .dcf-relative h2 {
-        font-size: 1.2rem;
-      }
-
-      .Intrinsic,
-      .dcf-relative {
-        font-size: 15px;
-      }
-    }
+
+
+
+
   </style>
 </head>
 <body>
@@ -775,10 +482,11 @@
   </nav>
 
   <div class="main">
+    
     <div class="search-container">
       <div class="search-text">
-        <p class="line1">MONEY SLEEPS</p>
-        <p class="line2">INVESTMENTS GROWS</p>
+    <p class="line1">MONEY SLEEPS</p>
+    <p class="line2">INVESTMENTS GROWS</p>
       </div>
       <form method="GET" action="/" class="search-form">
         <input id="stockInput" type="text" name="stock" placeholder="Enter stock symbol (e.g., ITC)" required />
@@ -819,7 +527,7 @@
             </div>
 
             <h3 style="color:#07eae3"> {{ stock_data.Stock }}</h3>
-            <p class="big-value" style="color: #eac9a7;">Market value ₹{{ current_price }}</p>
+            <p class="big-value" style="color: #eac9a7;">Market value    ₹{{ current_price }}</p>
             <div class="big-value" onclick="scrollToSection('intrinsic-explanation')" style="color: #ffffff;">Intrinsic value ₹{{ final_avg | round(2) }}</div>
 
             <div class="cards">
@@ -834,131 +542,222 @@
             </div>
           </div>
         {% endif %}
+<!-- Horizontal Flex Container for Text + News Card -->
+<div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 220px; margin-top: 100px;">
 
-        <div class="news-section">
-          <div class="soul-text">
-            <h2>The Soul of the Stock Market</h2>
-            <hr>
-            <p>
-              The stock market is more than numbers and chart — it's a living pulse of human emotion, risk, and ambition. 
-              It nurtures patience, honors conviction, and humbles even the most certain minds. 
-              Within its chaos hides rare opportunity; within its quiet, the wisdom of those who wait.
-            </p>
-          </div>
+  <!-- Left Side: Analysis Text -->
+  <div style="flex: 1; color: white;">
+    <h2 style="margin-bottom: 10px;">The Soul of the Stock Market</h2>
+    <hr style="border: 1px solid #444; margin-bottom: 10px;">
+    <p style="line-height: 1.6; font-size: 18px;">
+      The stock market is more than numbers and chart — it's a living pulse of human emotion, risk, and ambition. 
+      It nurtures patience, honors conviction, and humbles even the most certain minds. 
+      Within its chaos hides rare opportunity; within its quiet, the wisdom of those who wait.
+    </p>
+  </div>
 
-          <div class="news-card-wrapper">
-            <div class="card-container" id="newsSection">
-              <div class="card" id="newsCard">
-                <div class="card-side front" id="frontSide">Loading...</div>
-                <div class="card-side back" id="backSide">Loading...</div>
-              </div>
-            </div>
-          </div>
-        </div>
+  <!-- Right Side: News Card -->
+  <div style="flex: 1.2;">
+    <div class="card-container"id="newsSection">
+      <div class="card" id="newsCard">
+        <div class="card-side front" id="frontSide">Loading...</div>
+        <div class="card-side back" id="backSide">Loading...</div>
       </div>
     </div>
   </div>
 
-  <div id="transitionSection">
-    <div class="expanation">
-      <div class="Intrinsic">
-        <h2 id="intrinsic-explanation">How does valuation work?</h2>
-        <p>There are two methods to calculate the Intrinsic Value of a stock: 
-          <b>DCF Valuation</b> and <b>Relative Valuation</b>.  
-          We take the average of these two methods to estimate the intrinsic value as accurately as possible</p>
-      </div>
-
-      <div class="dcf-relative">
-        <h2 id="dcf-explanation">What is DCF (Discounted Cash Flow)?</h2>
-        <p>Discounted Cash Flow (DCF) is a valuation method used to estimate the intrinsic value of an investment,
-           business, or asset based on its expected future cash flows. 
-           It works by projecting how much cash the asset will generate in the future and then discounting
-           those cash flows back to their present value using a discount rate (usually based on the cost of capital or 
-           required rate of return)</p>
-        <p>
-           In <b>VSTAT</b> intrinsic value calculation using the Discounted Cash Flow (DCF) method. 
-          For most companies, it uses a Free Cash Flow (FCF)-based approach, where the past 5–10 years of FCF data are collected, 
-          an average FCF is calculated, and a reasonable growth rate is estimated based on historical trends. 
-          Future FCFs are then projected for the next 10 years and discounted back to their present value using 
-          the Weighted Average Cost of Capital (WACC). A terminal value is added to account for long-term growth beyond the 
-          projection period. For financial companies, where FCF may not be meaningful, the code uses an EPS-based DCF, 
-          projecting future earnings per share with a constant growth rate and discounting them using WACC.
-           In both cases, the total present value is divided by the number of shares to estimate the intrinsic value per share, 
-           which is compared to the current market price to determine if the stock is undervalued or overvalued.
-        </p>
-        <h2 id="relative-explanation">What is Relative valuation?</h2>
-        <p>
-          In <b>VSTAT</b> relative valuation of a stock by comparing its valuation multiples (P/E and P/B)
-           with its own historical averages and those of its sector peers. The process starts by identifying the stock's 
-           sector and mapping it to a predefined peer group. The system then retrieves the stock's 
-           Earnings Per Share (EPS) and Book Value Per Share (BVPS) to calculate its own 10-year average P/E and P/B ratios
-           based on monthly historical prices. Using these averages, it estimates two intrinsic values: 
-           one based on average P/E × EPS and another based on average P/B × BVPS
-        </p>
-        <p>
-          Simultaneously, it fetches sector average P/E and P/B ratios from its peer companies 
-          and calculates two more intrinsic values using sector multiples. These four valuations are 
-          then combined using weighted averages to estimate a final fair value per share. It is corrected using a 
-          simple average of the stock's own P/E and P/B-based values. The system finally compares the fair
-           value with the current price to determine if the stock is undervalued or overvalued, returning a 
-           clear verdict along with key valuation metrics
-        </p>
-      </div>
+</div>
+<div id="transitionSection" style="
+     width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  background: #ffffff; /* start dark */
+  animation: toWhite 2s ease backwards;
+  padding: 5px 20px 85px;
+  box-sizing: border-box;
+">
+<div class="expanation"   style="margin-top: 80px; text-align: center; font-size: 24px; color: #000000;">
+  <div class="Intrinsic" style ="margin-left: 420px; margin-right: 420px; font-size: 24px;">
+    <h2 id="intrinsic-explanation" style="color: #11171f">How does valuation work?</h2>
+  <p>There are two methods to calculate the Intrinsic Value of a stock: 
+    <b>DCF Valuation</b> and <b>Relative Valuation </b>.  
+    We take the average of these two methods to estimate the intrinsic value as accurately as possible</p>
     </div>
+
+  <div class="dcf-relative" style ="margin-left: 250px; margin-right: 250px; font-size: 22px; ;">
+    <h2 id="dcf-explanation" style="color: #0d1117">What is DCF (Discounted Cash Flow)?</h2>
+    <p>Discounted Cash Flow (DCF) is a valuation method used to estimate the intrinsic value of an investment,
+       business, or asset based on its expected future cash flows. 
+       It works by projecting how much cash the asset will generate in the future and then discounting
+       those cash flows back to their present value using a discount rate (usually based on the cost of capital or 
+       required rate of return)</p>
+    <p>
+       In <b>VSTAT</b> intrinsic value calculation using the Discounted Cash Flow (DCF) method. 
+      For most companies, it uses a Free Cash Flow (FCF)-based approach, where the past 5–10 years of FCF data are collected, 
+      an average FCF is calculated, and a reasonable growth rate is estimated based on historical trends. 
+      Future FCFs are then projected for the next 10 years and discounted back to their present value using 
+      the Weighted Average Cost of Capital (WACC). A terminal value is added to account for long-term growth beyond the 
+      projection period. For financial companies, where FCF may not be meaningful, the code uses an EPS-based DCF, 
+      projecting future earnings per share with a constant growth rate and discounting them using WACC.
+       In both cases, the total present value is divided by the number of shares to estimate the intrinsic value per share, 
+       which is compared to the current market price to determine if the stock is undervalued or overvalued.
+      </p>
+      <h2 id="relative-explanation" style="color: #0d1117">What is Relative valuation?</h2>
+      <p>
+        In <b>VSTAT</b>  relative valuation of a stock by comparing its valuation multiples (P/E and P/B)
+         with its own historical averages and those of its sector peers. The process starts by identifying the stock’s 
+         sector and mapping it to a predefined peer group. The system then retrieves the stock’s 
+         Earnings Per Share (EPS) and Book Value Per Share (BVPS) to calculate its own 10-year average P/E and P/B ratios
+         based on monthly historical prices. Using these averages, it estimates two intrinsic values: 
+         one based on average P/E × EPS and another based on average P/B × BVPS
+      </p>
+      <p>
+        Simultaneously, it fetches sector average P/E and P/B ratios from its peer companies 
+        and calculates two more intrinsic values using sector multiples. These four valuations are 
+        then combined using weighted averages to estimate a final fair value per share. It is corrected using a 
+        simple average of the stock’s own P/E and P/B-based values. The system finally compares the fair
+         value with the current price to determine if the stock is undervalued or overvalued, returning a 
+         clear verdict along with key valuation metrics
+      </p>
+
+  </div>
+</div>
+</div>
+
+
+<footer style="background-color: #0d1117; padding: 40px 80px; color: #cbd5e1;">
+  <div style="display: flex; justify-content: space-between; flex-wrap: wrap; border-bottom: 1px solid #333; padding-bottom: 30px;">
+
+    <div style="flex: 1; min-width: 200px;">
+      <h2 id="about-link" style="color: white; font-weight: 400;">VSTAT</h2>
+    </div>
+
+    <div style="flex: 1; min-width: 200px;">
+      <h4 style="color: white; font-weight: 600;">Company</h4>
+      <ul style="list-style: none; padding: 0;">
+        <li><a href="#" style="color: #9ca3af; text-decoration: none;">About Us</a></li>
+        <li><a href="#" style="color: #9ca3af; text-decoration: none;">Pricing</a></li>
+        <li><a href="#" style="color: #9ca3af; text-decoration: none;">Contact</a></li>
+        <li><a href="#" style="color: #9ca3af; text-decoration: none;">Privacy Policy</a></li>
+        <li><a href="#" style="color: #9ca3af; text-decoration: none;">Terms of Service</a></li>
+      </ul>
+    </div>
+
+    <div style="flex: 1; min-width: 200px;">
+      <h4 style="color: white; font-weight: 600;">Tools</h4>
+      <ul style="list-style: none; padding: 0;">
+        <li><a href="#" style="color: #9ca3af; text-decoration: none;">DCF Calculator</a></li>
+        <li><a href="#" style="color: #9ca3af; text-decoration: none;">Relative Valuation</a></li>
+        <li><a href="#" style="color: #9ca3af; text-decoration: none;">Screener</a></li>
+      </ul>
+    </div>
+
+    <div style="flex: 1; min-width: 200px;">
+      <h4 style="color: white; font-weight: 600;">Stocks</h4>
+      <ul style="list-style: none; padding: 0;">
+        <li><a href="#" style="color: #9ca3af; text-decoration: none;">Undervalued Stocks</a></li>
+        <li><a href="#" style="color: #9ca3af; text-decoration: none;">High Growth</a></li>
+        <li><a href="#" style="color: #9ca3af; text-decoration: none;">High Solvency</a></li>
+      </ul>
+    </div>
+
   </div>
 
-  <footer>
-    <div class="footer-content">
-      <div class="footer-section">
-        <h2 id="about-link">VSTAT</h2>
-      </div>
+  <div style="font-size: 14px; color: #9ca3af; padding-top: 20px;">
+    <p>© 2025 VSTAT. All rights reserved.</p>
+    <p>
+      This site is for informational purposes only. It does not constitute investment advice, nor a recommendation to buy or sell any securities.
+      Always consult a registered financial advisor before making investment decisions. VSTAT will not be liable for any loss or damage arising from use of this site.
+    </p>
+  </div>
+</footer>
 
-      <div class="footer-section">
-        <h4>Company</h4>
-        <ul>
-          <li><a href="#">About Us</a></li>
-          <li><a href="#">Pricing</a></li>
-          <li><a href="#">Contact</a></li>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Terms of Service</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-section">
-        <h4>Tools</h4>
-        <ul>
-          <li><a href="#">Stock Analyzer</a></li>
-          <li><a href="#">Portfolio Tracker</a></li>
-          <li><a href="#">News & Insights</a></li>
-          <li><a href="#">Valuation Reports</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-section">
-        <h4>Connect</h4>
-        <ul>
-          <li><a href="#">LinkedIn</a></li>
-          <li><a href="#">Twitter</a></li>
-          <li><a href="#">GitHub</a></li>
-          <li><a href="#">Support</a></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      &copy; 2025 VSTAT. All rights reserved.
-    </div>
-  </footer>
 
   <script>
-    function selectNiftyStock(symbol) {
-      document.getElementById('stockInput').value = symbol;
-    }
+  // Nifty stock selector
+  function selectNiftyStock(symbol) {
+    const input = document.getElementById("stockInput");
+    input.value = symbol;
+    input.dispatchEvent(new Event('change')); // trigger change for scroll
+    input.form.submit();
+  }
 
-    function scrollToSection(id) {
-      const el = document.getElementById(id);
-      if(el) el.scrollIntoView({ behavior: 'smooth' });
+  // Flip news headlines animation (unchanged)
+  const headlines = {{ headlines | tojson | safe }};
+  const card = document.getElementById('newsCard');
+  const front = document.getElementById('frontSide');
+  const back = document.getElementById('backSide');
+  let index = 0, rotation = 0;
+
+  function renderHeadline(container, item) {
+    container.innerHTML = `
+     <a href="${item.link}" target="_blank" style="text-decoration: none; color: white;">
+        <div class="headline-content">
+          <h3 style="margin-bottom: 10px;">${item.query}</h3>
+          <p style="font-weight: bold;">${item.headline}</p>
+        </div>
+      </a>`;
+  }
+
+  if (headlines.length > 0) {
+    renderHeadline(front, headlines[0]);
+    setInterval(() => {
+      index = (index + 1) % headlines.length;
+      rotation += 180;
+      card.style.transform = `rotateY(${rotation}deg)`;
+      setTimeout(() => {
+        const side = (rotation / 180) % 2 === 0 ? front : back;
+        renderHeadline(side, headlines[index]);
+      }, 180);
+    }, 8000);
+  } else {
+    front.textContent = "No news available.";
+  }
+
+  // Scroll to result after input change or form submission
+  function scrollToResults() {
+    const result = document.getElementById("stockResults");
+    if (result) {
+      setTimeout(() => {
+        result.scrollIntoView({ behavior: "smooth" });
+      }, 500); // give time for rendering
     }
-  </script>
+  }
+
+  // Attach scroll trigger after form submission
+  const input = document.getElementById("stockInput");
+  const form = input?.form;
+
+  if (form) {
+    form.addEventListener("submit", function (e) {
+      // allow normal submission, scroll after reload
+      sessionStorage.setItem("scrollToResult", "true");
+    });
+
+    input.addEventListener("change", function () {
+      sessionStorage.setItem("scrollToResult", "true");
+      form.submit(); // auto-submit on change
+    });
+  }
+
+  // On page load, check if scroll flag is set
+  window.addEventListener("load", function () {
+    const shouldScroll = sessionStorage.getItem("scrollToResult");
+    {% if stock_data %}
+      if (shouldScroll === "true") {
+        scrollToResults();
+        sessionStorage.removeItem("scrollToResult");
+      }
+    {% endif %}
+  });
+  function scrollToSection(id) {
+  const section = document.getElementById(id);
+  if (section) {
+    section.scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
+  
+</script>
+
 </body>
 </html>
