@@ -1,20 +1,22 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+VSTAT - Stock Valuation Dashboard
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+Live Demo: https://vstat-eta.vercel.app/
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+VSTAT is a powerful yet simple web application designed specifically for Indian stock investors to determine whether NSE-listed stocks are undervalued or overvalued. By combining two proven financial analysis methods—Discounted Cash Flow (DCF) which forecasts future cash flows and discounts them to present value, and Relative Valuation which benchmarks the stock against industry peers using P/E and P/B ratios—VSTAT provides comprehensive intrinsic value estimates. The app supports major Nifty 50 companies across 10+ sectors including IT, Banking, FMCG, Energy, Pharma, and Auto, with specialized logic for financial companies that require earnings-based rather than cash flow-based analysis. Alongside valuation results, it displays live market news headlines covering critical topics like RBI policy, FII flows, inflation data, oil prices, and global events, giving users complete market context in one dashboard. Built with a clean, mobile-responsive interface, VSTAT makes professional-grade stock analysis accessible to retail investors without requiring complex spreadsheets or financial expertise.
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+Key Features:
+• Dual Valuation: DCF + Relative (P/E, P/B peer comparison)
+• Nifty 50 Quick Buttons for instant analysis
+• Live News Feed: 25 market-moving topics
+• Sector-specific models (Banks use EPS DCF)
+• Mobile/Desktop responsive design
+• Real-time NSE data via Yahoo Finance
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+How to Use:
+1. Visit https://vstat-eta.vercel.app/
+2. Enter stock symbol (ITC, RELIANCE, TCS) or click Nifty button
+3. View Intrinsic Value vs Current Market Price
+4. Check "✅ Undervalued" or "❌ Overvalued" verdict
+5. Read relevant market news headlines
+
+For educational purposes only. Not investment advice. Always consult a financial advisor.
